@@ -1,0 +1,32 @@
+reviews:
+  auto_review: true
+  review_status: true
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  collapse_walkthrough: false
+
+language_settings:
+  typescript:
+    enabled: true
+  javascript:
+    enabled: true
+  sql:
+    enabled: true
+
+tone: concise
+
+path_filters:
+  - "!node_modules/**"
+  - "!.next/**"
+  - "!*.db"
+  - "!package-lock.json"
+  - "!tsconfig.tsbuildinfo"
+
+knowledge_base:
+  - "This is a Next.js TypeScript project with database analysis tools"
+  - "Focus on security issues in database queries and API routes"
+  - "Flag performance issues in simulation and analysis scripts"
+
+chat:
+  auto_reply: true
