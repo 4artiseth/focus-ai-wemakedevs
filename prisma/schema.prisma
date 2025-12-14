@@ -1,0 +1,154 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Tier 1: Required
+  name        String
+  description String
+  category    String
+  audience    String   // Description of target audience
+  demographics String? // JSON or text description of age/income/etc
+  researchGoal String
+  panelSize   Int      @default(8)
+
+  // Relations
+  details     ProjectDetails?
+  settings    Settings?
+  personas    Persona[]
+  sessions    Session[]
+}
+
+
+
+model Settings {
+  id          String   @id @default(cuid())
+  projectId   String   @unique
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Tier 3: Tone/Realism
+  tone        Int      @default(50) // 0-100 (Casual -> Professional)
+  skepticism  Int      @default(50) // 0-100 (Optimistic -> Critical)
+  detailLevel Int      @default(50) // 0-100 (Brief -> In-depth)
+  
+  analysisDepth String @default("standard") // quick, standard, deep
+}
+
+model ProjectDetails {
+  id        String  @id @default(cuid())
+  projectId String  @unique
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  // Tier 1: Core
+  category      String? // SaaS, Physical, Service, etc.
+  panelSize     Int     @default(8)
+  researchGoal  String? // Validate, Pricing, Features, etc.
+  problem       String? // The specific problem the product solves
+
+  // Tier 2: Recommended
+  customQuestions String? // JSON array of strings
+  priceExpected   Float?
+  priceMin        Float?
+  priceMax        Float?
+  pricingModel    String? // One-time, Monthly, Annual
+  coreFeatures    String? // JSON array or comma-separated
+  premiumFeatures String?
+  futureFeatures  String?
+  conjointFeatures String? // Comma-separated list of features for conjoint analysis
+
+  // Tier 3: Advanced
+  competitors       String? // JSON array
+  personaConstraints String? // JSON object
+  toneFormality     Int?    @default(50) // 0-100
+  toneSkepticism    Int?    @default(50) // 0-100
+  analysisDepth     String? // Quick, Standard, Deep
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Persona {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  name        String
+  age         Int
+  occupation  String
+  income      String?
+  location    String?
+  bio         String
+  traits      String?  // JSON of psychographics
+  
+  responses   Response[]
+}
+
+model Session {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  status      String   @default("draft") // draft, generating_personas, ready, running, completed
+  
+  createdAt   DateTime @default(now())
+  
+  responses   Response[]
+  insights    Insight[]
+  messages    Message[]
+  metadata    String? // JSON state for resumeable simulation
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  sender    String
+  content   String
+  metadata  String?
+  
+  createdAt DateTime @default(now())
+}
+
+model Response {
+  id          String   @id @default(cuid())
+  sessionId   String
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  personaId   String
+  persona     Persona  @relation(fields: [personaId], references: [id])
+  
+  question    String
+  answer      String
+  reasoning   String? // Inner monologue/Chain of thought
+  metadata    String? // JSON metadata (scores, coordinates, etc.)
+  analysis    String? // JSON structured analysis data
+  
+  createdAt   DateTime @default(now())
+}
+
+model Insight {
+  id          String   @id @default(cuid())
+  sessionId   String
+  session     Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  type        String   // pricing, feature, sentiment, etc.
+  content     String
+  confidence  Float
+  citations   String?  // JSON array of response IDs or quotes
+  
+  createdAt   DateTime @default(now())
+}
