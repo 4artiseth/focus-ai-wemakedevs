@@ -18,7 +18,7 @@ _Watch AI agents debate your product decisions in real-time_
 
 - **Focus groups are slow, expensive, and hard to repeat**
 - **Surveys capture opinions, not behavior**
-- **Teams only learn what failed after launch**
+- **Teams only learn what failed AFTER launch**
 
 **Focus AI moves this feedback before decisions are made.**
 
@@ -27,8 +27,8 @@ _Watch AI agents debate your product decisions in real-time_
 ## What Makes This Different
 
 - **Simulates behavior, not just answers** — Agents make tradeoffs like real users
-- **Uses multiple AI agents with different psychographics** — Not one generic response
-- **Agents debate pricing, features, and tradeoffs** — See the reasoning, not just scores
+- **Uses multiple AI agents with DIFFERENT psychographics** — Not one generic response
+- **Agents DEBATE pricing, features, and tradeoffs** — See the reasoning, not just scores
 - **Produces a clear build / fix / kill verdict** — Actionable insights, not data dumps
 
 **This isn't a ChatGPT wrapper. It's a multi-agent decision engine.**
