@@ -281,8 +281,8 @@ export default function LandingPage() {
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                       <td className="p-8 font-bold text-white">Cost</td>
                       <td className="text-center p-8">$$$$</td>
-                      <td className="text-center p-8">$$</td>
-                      <td className="text-center p-8 bg-white/5 text-white font-bold text-xl">$</td>
+                      <td className="text-center p-8">$$$</td>
+                      <td className="text-center p-8 bg-white/5 text-white font-bold text-xl">$$</td>
                     </tr>
                     <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                       <td className="p-8 font-bold text-white">Scalability</td>
@@ -372,7 +372,7 @@ export default function LandingPage() {
 
       <footer className="py-12 border-t-2 border-white/20">
         <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
-          <p>2024 FocusAI Inc.</p>
+          <p>2025 FocusAI Inc.</p>
           <nav className="flex gap-6">
             <Link className="hover:text-white transition-colors" href="#">Terms</Link>
             <Link className="hover:text-white transition-colors" href="#">Privacy</Link>
