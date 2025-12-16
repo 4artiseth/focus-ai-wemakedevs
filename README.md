@@ -155,7 +155,7 @@ MIT
 
 ## Acknowledgments
 
-Built with ❤️ during WeMakeDevs Hackathon  
+Built with ❤️ during the Hackathon  
 Powered by Google Gemini AI
 
 ---
