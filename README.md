@@ -81,8 +81,6 @@ _Watch AI agents debate your product decisions in real-time_
 
 ## Team
 
-Built during **WeMakeDevs Hackathon 2024**
-
 **Team of 2:**
 
 - **Aarti** — Full-stack dev, AI orchestration
